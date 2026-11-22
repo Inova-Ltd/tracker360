@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tracker 360 · Inova Global Ltd</title>
+<meta name="description" content="Tracker 360 by Inova Global Ltd: low-cost cargo door security. A BLE door sensor on the trailer, a gateway phone in the cab, and instant alerts with time and GPS to the owner.">
+<meta property="og:title" content="Tracker 360 · Inova Global Ltd">
+<meta property="og:description" content="Low-cost cargo door security: BLE door sensor, gateway phone in the cab, instant owner alerts with GPS.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://inova-ltd.github.io/tracker360/img/video-poster.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column with wide bands for screenshots; a trailer-door "plate" motif (number-plate yellow) marks the accent. */
+:root {
+  --bg: #f3f4f2;
+  --surface: #ffffff;
+  --ink: #15191d;
+  --muted: #5a636b;
+  --line: #d9ddd9;
+  --plate: #f6c818;
+  --plate-ink: #15191d;
+  --alert: #c8261c;
+  --ok: #1d7a43;
+  --code-bg: #15191d;
+  --code-fg: #e9ece9;
+  --ph-bg: repeating-linear-gradient(135deg, #eceeea 0 12px, #e4e7e3 12px 24px);
+  --display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111417; --surface: #191d21; --ink: #e8ebe8; --muted: #9aa3aa; --line: #2b3137;
+  --plate: #f6c818; --plate-ink: #15191d; --alert: #ff6a5c; --ok: #4fc47f;
+  --code-bg: #0b0d0f; --code-fg: #e9ece9;
+  --ph-bg: repeating-linear-gradient(135deg, #1a1e22 0 12px, #1f2428 12px 24px);
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #111417; --surface: #191d21; --ink: #e8ebe8; --muted: #9aa3aa; --line: #2b3137;
+  --plate: #f6c818; --plate-ink: #15191d; --alert: #ff6a5c; --ok: #4fc47f;
+  --code-bg: #0b0d0f; --code-fg: #e9ece9;
+  --ph-bg: repeating-linear-gradient(135deg, #1a1e22 0 12px, #1f2428 12px 24px);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+img { max-width: 100%; height: auto; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.read { max-width: 68ch; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.05; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(30px, 4.4vw, 44px); font-weight: 800; font-stretch: 80%; letter-spacing: -0.01em; }
+h3 { font-size: 21px; font-weight: 700; font-stretch: 90%; }
+p { margin: 0; }
+a { color: inherit; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--plate); outline-offset: 2px; }
+.eyebrow { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.plate { display: inline-block; background: var(--plate); color: var(--plate-ink); border: 2px solid var(--plate-ink); border-radius: 6px; padding: 2px 10px; font-family: var(--display); font-weight: 800; font-stretch: 85%; letter-spacing: 0.04em; }
+section { padding-block: 72px; border-top: 1px solid var(--line); }
+.sec-head { display: grid; gap: 14px; margin-bottom: 36px; }
+.sec-head p { color: var(--muted); max-width: 64ch; }
+.mono { font-family: var(--mono); }
+
+/* Hero */
+.hero { padding-block: 56px 64px; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+.hero h1 { font-size: clamp(46px, 7.2vw, 88px); font-weight: 800; font-stretch: 75%; letter-spacing: -0.015em; text-transform: uppercase; }
+.hero h1 em { font-style: normal; color: var(--alert); }
+.hero .lede { font-size: 19px; color: var(--muted); margin-top: 20px; max-width: 46ch; }
+.hero .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+.hero .meta { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 26px; font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.packet { background: var(--code-bg); color: var(--code-fg); border-radius: 12px; padding: 22px; font-family: var(--mono); font-size: 14px; min-width: 0; }
+.packet .bar { display: flex; justify-content: space-between; gap: 10px; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #8d969d; margin-bottom: 14px; }
+.bytes { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+.bytes span { padding: 4px 7px; border-radius: 4px; background: #23292e; }
+.bytes .k1 { background: #3b3410; color: #f6d65c; }
+.bytes .k2 { background: #3e1a17; color: #ff8a7d; }
+.bytes .k3 { background: #13302a; color: #79d9a8; }
+.decode { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; font-size: 13.5px; }
+.decode dt { color: #8d969d; }
+.decode dd { margin: 0; }
+.decode .hot { color: #ff8a7d; font-weight: 500; }
+.packet .foot { margin-top: 16px; padding-top: 14px; border-top: 1px solid #2b3137; color: #8d969d; font-size: 12px; }
+
+/* Problem/how */
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.three > div { display: grid; gap: 8px; align-content: start; }
+.three p { color: var(--muted); font-size: 16px; }
+
+/* Architecture */
+.flow { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.2fr) auto minmax(0, 1.3fr); gap: 14px; align-items: stretch; }
+.node { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.node .eyebrow { font-size: 11px; }
+.node ul { margin: 4px 0 0; padding-left: 18px; color: var(--muted); font-size: 14.5px; }
+.node.key { border: 2px solid var(--ink); }
+.arrow { display: grid; place-items: center; font-family: var(--mono); font-size: 11px; color: var(--muted); text-align: center; }
+.arrow b { display: block; font-size: 22px; color: var(--ink); line-height: 1; }
+.outs { display: grid; gap: 12px; min-width: 0; }
+.outs .node { padding: 14px 16px; }
+.outs .node p { color: var(--muted); font-size: 14.5px; }
+
+/* Screens */
+.shot { margin: 0; display: grid; gap: 12px; }
+.shot img { display: block; width: 100%; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); }
+.shot figcaption { font-size: 14.5px; color: var(--muted); }
+.shot figcaption b { color: var(--ink); font-weight: 600; }
+.shots-row { display: grid; grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr); gap: 24px; margin-top: 28px; align-items: start; }
+.sample-note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 22px; }
+.theme-light-only { }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .shot-main-light { display: none; } }
+:root[data-theme="dark"] .shot-main-light { display: none; }
+.shot-main-dark { display: none; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .shot-main-dark { display: grid; } }
+:root[data-theme="dark"] .shot-main-dark { display: grid; }
+
+/* Placeholders */
+.ph-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.ph { margin: 0; display: grid; gap: 10px; }
+.ph .frame { aspect-ratio: 9 / 16; max-width: 100%; border-radius: 16px; border: 2px dashed var(--muted); background: var(--ph-bg); display: grid; place-items: center; text-align: center; padding: 16px; }
+.ph .frame.wide { aspect-ratio: 4 / 3; }
+.ph .frame span { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+.ph figcaption { font-size: 14.5px; color: var(--muted); }
+.ph figcaption b { color: var(--ink); }
+.det-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.det-grid .frame { aspect-ratio: 590 / 1280; }
+.real { margin: 0; display: grid; gap: 10px; }
+.real img { display: block; width: 100%; border-radius: 16px; border: 1px solid var(--line); }
+.real figcaption { font-size: 14.5px; color: var(--muted); }
+.real figcaption b { color: var(--ink); }
+@media (max-width: 900px) { .det-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.alert-card { margin-top: 36px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
+.notif { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; display: grid; gap: 6px; font-size: 15px; }
+.notif .top { display: flex; justify-content: space-between; gap: 8px; font-size: 12.5px; color: var(--muted); }
+.notif .t { font-weight: 600; color: var(--alert); }
+.notif .mono { font-size: 13.5px; }
+.notif-label { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+
+/* Video */
+.video { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 32px; align-items: center; }
+.video .frame { aspect-ratio: 16 / 9; max-width: 100%; border-radius: 12px; border: 2px dashed var(--muted); background: var(--ph-bg); display: grid; place-items: center; }
+.play { width: 74px; height: 74px; border-radius: 50%; background: var(--ink); display: grid; place-items: center; }
+.play::after { content: ""; border-style: solid; border-width: 13px 0 13px 22px; border-color: transparent transparent transparent var(--bg); margin-left: 6px; }
+.video ol { margin: 14px 0 0; padding-left: 20px; color: var(--muted); font-size: 15.5px; display: grid; gap: 4px; }
+.vid { display: block; width: 100%; height: auto; border-radius: 12px; background: #111417; }
+.vnote { font-size: 14px; color: var(--muted); margin-top: 14px; }
+.todo { display: inline-block; font-family: var(--mono); font-size: 13px; padding: 8px 12px; border: 1px dashed var(--muted); border-radius: 8px; margin-top: 18px; color: var(--muted); }
+
+/* Tech */
+.tech { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
+.tech > div { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; padding-block: 18px; border-bottom: 1px solid var(--line); }
+.tech .layer { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.tech b { font-weight: 600; }
+.tech p { font-size: 15.5px; color: var(--muted); margin-top: 2px; }
+
+/* Sensors */
+.sensors { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.sensor { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: grid; gap: 8px; align-content: start; }
+.sensor.live { border: 2px solid var(--ink); }
+.sensor .tag { justify-self: start; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); }
+.sensor.live .tag { background: var(--plate); color: var(--plate-ink); border-color: var(--plate-ink); }
+.sensor p { color: var(--muted); font-size: 15px; }
+.sensor .mono { font-size: 12.5px; color: var(--muted); }
+.why { margin-top: 32px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.why p { font-size: 15.5px; color: var(--muted); margin-top: 6px; }
+
+/* Status */
+.status { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+.status ul { margin: 12px 0 0; padding-left: 20px; display: grid; gap: 6px; color: var(--muted); font-size: 16px; }
+footer { padding-block: 40px 64px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .flow { grid-template-columns: minmax(0, 1fr); }
+  .arrow b { transform: rotate(90deg); }
+  .three, .why, .status, .tech, .alert-card, .video, .shots-row { grid-template-columns: minmax(0, 1fr); }
+  .sensors { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ph-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .shots-row .shot:last-child { max-width: 360px; }
+}
+@media (max-width: 520px) {
+  body { font-size: 16px; }
+  section { padding-block: 52px; }
+  .sensors { grid-template-columns: minmax(0, 1fr); }
+  .tech > div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div>
+    <div class="brand"><span class="plate">360</span><span class="eyebrow">Tracker 360 · Inova Global Ltd</span></div>
+    <h1>Know the moment a trailer door <em>opens</em>.</h1>
+    <p class="lede">A low-cost cargo security system for goods owners. A door sensor on the trailer, a dedicated phone in the cab, and an instant alert with time and GPS position on the owner's phone, inbox and web portal.</p>
+    <div class="meta"><span>Prototype v0.3</span><span>Android + iPhone gateway</span><span>Web portal</span><span>UK, 2026</span></div>
+  </div>
+  <div class="packet" aria-label="Example: a real door sensor broadcast decoded by the gateway">
+    <div class="bar"><span>BLE advert · service 0xFCD2</span><span>BTHome v2</span></div>
+    <div class="bytes">
+      <span>44</span><span class="k1">01</span><span class="k1">64</span><span class="k2">2D</span><span class="k2">01</span><span class="k3">3F</span><span class="k3">7D</span><span class="k3">00</span><span>64</span><span>02</span>
+    </div>
+    <dl class="decode">
+      <dt>0x01 battery</dt><dd>100 %</dd>
+      <dt>0x2D window</dt><dd class="hot">OPEN → alert</dd>
+      <dt>0x3F rotation</dt><dd>12.5°</dd>
+      <dt>0x64 light</dt><dd>bright</dd>
+    </dl>
+    <div class="foot">A real door sensor packet in the open BTHome format, as decoded by the gateway app (from its unit tests).</div>
+  </div>
+</header>
+
+<section id="overview">
+  <div class="sec-head">
+    <span class="eyebrow">Overview</span>
+    <h2>Cargo theft happens at the doors, often while nobody is watching.</h2>
+    <p>Goods owners who ship through subcontracted hauliers usually have no view of what happens to the trailer between collection and delivery. Tracker 360 gives them that view with off-the-shelf hardware: no fleet telematics contract, no wiring into the truck.</p>
+  </div>
+  <div class="three">
+    <div><h3>Sensor on the door</h3><p>A low-cost Bluetooth Low Energy door sensor sits on the trailer door. Tracker 360 is not tied to one brand: any sensor that broadcasts the open BTHome format works, and each logistics customer can use the sensors that suit their fleet.</p></div>
+    <div><h3>Gateway phone in the cab</h3><p>A dedicated phone provided by the shipping company, not the driver's own phone, runs the Tracker 360 app. It listens for the sensor, adds time and GPS position, and forwards every door event.</p></div>
+    <div><h3>Alert to the owner</h3><p>Within seconds the owner gets an urgent push alert with a map link, an email from alarms@inovaltd.com, and the event appears in the web portal alongside every truck and sensor.</p></div>
+  </div>
+</section>
+
+<section id="architecture">
+  <div class="sec-head">
+    <span class="eyebrow">Architecture</span>
+    <h2>One sensor event, three ways to the owner.</h2>
+    <p>The gateway phone does all the work in the truck. Each output has its own offline outbox, so an event raised in a signal blackspot is delivered, marked late, as soon as the phone is back online.</p>
+  </div>
+  <div class="flow">
+    <div class="node">
+      <span class="eyebrow">On the trailer door</span>
+      <h3>BLE door sensor</h3>
+      <ul><li>Magnetic open/closed contact</li><li>Open BTHome format over BLE</li><li>Instant broadcast on change, regular heartbeat</li><li>Any compatible brand</li></ul>
+    </div>
+    <div class="arrow"><span><b>→</b>BLE</span></div>
+    <div class="node key">
+      <span class="eyebrow">In the cab</span>
+      <h3>Tracker 360 gateway app</h3>
+      <ul><li>Foreground service, filtered BLE scan</li><li>Decodes BTHome, detects open/close</li><li>Attaches time, GPS fix and accuracy</li><li>Loud on-phone alarm, local event log</li><li>"Monitoring stopped" alert if switched off</li><li>Outbox and retry when offline</li></ul>
+    </div>
+    <div class="arrow"><span><b>→</b>HTTPS</span></div>
+    <div class="outs">
+      <div class="node"><h3>Push alert</h3><p>ntfy topic per truck. Urgent priority for door opened, with a Google Maps link.</p></div>
+      <div class="node"><h3>Email</h3><p>Relay script sends as alarms@inovaltd.com through Microsoft 365, to one or more owner addresses.</p></div>
+      <div class="node"><h3>Web portal</h3><p>Supabase (Postgres). Events uploaded on each change, plus a 5-minute heartbeat per sensor.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="portal">
+  <div class="sec-head">
+    <span class="eyebrow">Web portal</span>
+    <h2>Every truck, every door, every event.</h2>
+    <p>The portal lists each gateway phone by registration with its sensors, live door state, battery, signal and when each was last heard. The event history shows every opening with time, GPS position and a map link, and flags events that arrived late because the truck had no signal.</p>
+  </div>
+  <figure class="shot shot-main-light">
+    <img src="img/portal-desktop.png" alt="Tracker 360 portal: summary tiles for trucks reporting, doors open now, openings in 24 hours and sensors needing attention; a list of three trucks with their door sensors; and an event history table." width="2560" height="1720">
+    <figcaption><b>Fleet overview.</b> One door open right now on YX22 BHF, a side-door sensor at 17% battery flagged red, and one truck with monitoring switched off.</figcaption>
+  </figure>
+  <figure class="shot shot-main-dark">
+    <img src="img/portal-desktop-dark.png" alt="Tracker 360 portal in dark mode: summary tiles, trucks and sensors list, event history table." width="2560" height="1720">
+    <figcaption><b>Fleet overview.</b> One door open right now on YX22 BHF, a side-door sensor at 17% battery flagged red, and one truck with monitoring switched off.</figcaption>
+  </figure>
+  <div class="shots-row">
+    <figure class="shot">
+      <img src="img/portal-selected.png" alt="Portal with the rear-door sensor of truck LK70 KTV selected, showing only its four open and close events with locations." width="2560" height="1720" loading="lazy">
+      <figcaption><b>One sensor's history.</b> Selecting a sensor filters the history to that door: when it opened, where the truck was, and how long it stayed open.</figcaption>
+    </figure>
+    <figure class="shot">
+      <img src="img/portal-mobile.png" alt="Portal on a phone screen, showing summary tiles and the truck list stacked in one column." width="1170" height="2532" loading="lazy">
+      <figcaption><b>On a phone.</b> The same portal works on the owner's phone.</figcaption>
+    </figure>
+  </div>
+  <p class="sample-note">Screenshots use the portal's built-in sample data (made-up trucks and events) so no real customer locations are shown.</p>
+</section>
+
+<section id="detections">
+  <div class="sec-head">
+    <span class="eyebrow">Detection in action</span>
+    <h2>From door to owner's phone.</h2>
+    <p>Steps 2 to 4 are real screenshots from a test on 15 November 2026, with an off-the-shelf BLE door sensor (SBDW-103C) and an iPhone as the gateway. GPS positions are blurred. Steps 1 and 5 are illustrations.</p>
+  </div>
+  <div class="det-grid">
+    <figure class="real"><img src="img/sensor-fitted.png" alt="Illustration of trailer rear doors with a BLE door sensor fitted at the door gap above the lock and its magnet on the other door leaf." width="1170" height="2538" loading="lazy"><figcaption><b>1. Sensor fitted.</b> The sensor sits at the door gap, its magnet on the other door leaf. Opening the door moves the magnet away. <i>Illustration.</i></figcaption></figure>
+    <figure class="real"><img src="img/gateway-app.png" alt="Tracker 360 gateway app on iPhone: sensor SBDW-103C nearby at -32 dBm with 100% battery, and a log of door opened and door closed events with times." width="590" height="1280" loading="lazy"><figcaption><b>2. Gateway detects it.</b> The app hears the sensor (signal, battery, tilt, light) and logs every open and close with time and GPS.</figcaption></figure>
+    <figure class="real"><img src="img/alarm-screen.png" alt="Full-screen red DOOR OPENED alarm on the gateway phone showing sensor SBDW-103C and the time 15 Nov 2026 10:34:38." width="590" height="1280" loading="lazy"><figcaption><b>3. Alarm on the gateway.</b> A full-screen DOOR OPENED alarm with sensor, time and position.</figcaption></figure>
+    <figure class="real"><img src="img/alert-email.png" alt="Email from Tracker 360 Alarms with subject [Tracker 360] DOOR OPENED - SBDW-103C, showing time, location, map link, sensor battery 100% and gateway iPhone." width="1290" height="1320" loading="lazy"><figcaption><b>4. Email to the owner.</b> Tracker 360 Alarms sends the time, location, map link and sensor battery.</figcaption></figure>
+    <figure class="real"><img src="img/owner-push.png" alt="Mock-up of a phone lock screen with an urgent DOOR OPENED - Rear doors push notification showing time, location, sensor battery and gateway YX22 BHF, with Open map and Dismiss buttons." width="1170" height="2538" loading="lazy"><figcaption><b>5. Push on the owner's phone.</b> Urgent notification that can break through Do Not Disturb; tapping it opens the map. <i>Mock-up using the app's real message format.</i></figcaption></figure>
+  </div>
+  <div class="alert-card">
+    <div>
+      <div class="notif-label">What the owner's alert carries (format from the app)</div>
+      <div class="notif">
+        <div class="top"><span>ntfy · urgent</span><span>now</span></div>
+        <div class="t">DOOR OPENED - Rear doors</div>
+        <div class="mono">Time: 21 Nov 2026 14:01:29 GMT</div>
+        <div class="mono">Location: 52.41230, -1.51870 (±5 m, fix 2s old)</div>
+        <div class="mono">Sensor battery: 88% · Gateway: YX22 BHF</div>
+        <div><a href="https://maps.google.com/?q=52.41230,-1.51870" target="_blank" rel="noopener">Open in Google Maps</a></div>
+      </div>
+    </div>
+    <div>
+      <div class="notif-label">Event record sent to the portal and webhooks</div>
+      <div class="packet" style="font-size:12.5px; overflow-x:auto;">
+<pre style="margin:0; white-space:pre;">{"type": "OPEN",
+ "time_text": "21 Nov 2026 14:01:29",
+ "address": "AA:BB:CC:10:20:30",
+ "lat": 52.41230, "lon": -1.51870,
+ "accuracy_m": 5.0, "battery": 88,
+ "source": "tracker360-android"}</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="video">
+  <div class="video" style="margin-bottom:56px;">
+    <video class="vid" controls playsinline preload="metadata" poster="img/ad-poster.jpg" width="1920" height="1080"><source src="img/tracker360-ad.mp4" type="video/mp4"></video>
+    <div>
+      <span class="eyebrow">Animated ad · 34 s</span>
+      <h2 style="margin-top:12px;">A break-in, caught in seconds.</h2>
+      <ol>
+        <li>A trailer parked overnight</li>
+        <li>Door sensor fitted in under a minute</li>
+        <li>Someone forces the doors at 02:14</li>
+        <li>The phone in the cab raises the alarm</li>
+        <li>The owner's phone gets the alert</li>
+      </ol>
+    </div>
+  </div>
+  <div class="video">
+    <video class="vid" controls playsinline preload="metadata" poster="img/video-poster.jpg" width="1920" height="1080"><source src="img/tracker360-demo.mp4" type="video/mp4"></video>
+    <div>
+      <span class="eyebrow">Demo video</span>
+      <h2 style="margin-top:12px;">A door opening, end to end.</h2>
+      <ol>
+        <li>Sensor fitted on the trailer doors</li>
+        <li>Door opens, the sensor broadcasts</li>
+        <li>Alarm on the gateway phone in the cab</li>
+        <li>Push alert and email to the owner</li>
+        <li>Event in the web portal</li>
+      </ol>
+      <p class="vnote">42-second animated walkthrough built from the screenshots on this page.</p>
+    </div>
+  </div>
+</section>
+
+<section id="technology">
+  <div class="sec-head">
+    <span class="eyebrow">Technology</span>
+    <h2>Built on open standards and low-cost services.</h2>
+    <p>Every part was chosen so a pilot runs on free tiers and consumer hardware, with a clear path to a hosted product.</p>
+  </div>
+  <div class="tech">
+    <div><span class="layer">Sensor</span><div><b>Any BLE door sensor (BTHome)</b><p>Open BTHome v2 format (service UUID 0xFCD2), supported by several sensor makers. No vendor cloud or lock-in; other sensor formats can be added to the gateway.</p></div></div>
+    <div><span class="layer">Android</span><div><b>Kotlin gateway app</b><p>Foreground service with filtered BLE scanning, fused GPS, notification channels, offline outboxes. Android 8 and later.</p></div></div>
+    <div><span class="layer">iPhone</span><div><b>SwiftUI + CoreBluetooth</b><p>Test build of the same gateway for iOS 16 and later, same alert format as Android.</p></div></div>
+    <div><span class="layer">Push</span><div><b>ntfy</b><p>Open-source push notifications with priorities, so a door opening can break through Do Not Disturb. Self-hostable.</p></div></div>
+    <div><span class="layer">Email</span><div><b>Apps Script relay + Microsoft Graph</b><p>Sends as alarms@inovaltd.com from Microsoft 365, to an allow-listed set of owner addresses.</p></div></div>
+    <div><span class="layer">Backend</span><div><b>Supabase (PostgreSQL)</b><p>Row-level security. Phones can only call one ingest function with a per-gateway secret; portal users sign in to read.</p></div></div>
+    <div><span class="layer">Portal</span><div><b>Static HTML + JavaScript</b><p>No build step, refreshes every 30 seconds, works on desktop and phone. Hostable anywhere.</p></div></div>
+    <div><span class="layer">Delivery</span><div><b>GitHub Actions</b><p>Every push builds the Android APK, runs the unit tests (BTHome decoding, alerts, portal sync) and builds the iOS app.</p></div></div>
+  </div>
+</section>
+
+<section id="sensors">
+  <div class="sec-head">
+    <span class="eyebrow">Beyond the door</span>
+    <h2>The same platform works for other sensors.</h2>
+    <p>Door monitoring is the first use. The gateway decodes BTHome, an open standard used by many low-cost Bluetooth sensors, and the portal stores events by sensor and event type. Adding a new kind of sensor reuses the gateway, the alerts and the portal.</p>
+  </div>
+  <div class="sensors">
+    <div class="sensor live"><span class="tag">Live today</span><h3>Door open / closed</h3><p>Rear and side doors on trailers and containers.</p><span class="mono">BTHome 0x2D window</span></div>
+    <div class="sensor"><span class="tag">Next</span><h3>Temperature and humidity</h3><p>Cold-chain loads: food, pharmaceuticals. Alert when a reading leaves its safe range.</p><span class="mono">BTHome 0x02 temp · 0x03 humidity</span></div>
+    <div class="sensor"><span class="tag">Next</span><h3>GPS tracking and geofences</h3><p>The gateway already records position with every event. Add route history, unexpected stops and depot geofences.</p><span class="mono">Phone GPS</span></div>
+    <div class="sensor"><span class="tag">Next</span><h3>Cargo presence and shock</h3><p>Detect pallets removed, heavy impacts or tilting loads using motion, vibration and distance sensors.</p><span class="mono">BTHome motion · vibration · distance</span></div>
+    <div class="sensor"><span class="tag">Next</span><h3>Light inside the trailer</h3><p>A sudden light change in a closed trailer can reveal a cut curtain side, which bypasses door sensors.</p><span class="mono">BTHome 0x05 illuminance</span></div>
+    <div class="sensor"><span class="tag">Phase 2</span><h3>Camera on door events</h3><p>Trigger a photo or clip when a door opens, attached to the alert and the portal record.</p><span class="mono">Gateway camera / IP camera</span></div>
+  </div>
+  <div class="why">
+    <div><h3>Any sensor brand</h3><p>The gateway reads an open standard, so each logistics company can use the sensors it already trusts. The phone in the cab listens to many sensors at once.</p></div>
+    <div><h3>One alert pipeline</h3><p>Push, email and portal already carry any event type with time and location, including the offline outbox.</p></div>
+    <div><h3>One portal</h3><p>Trucks, sensors and events are already modelled generically, so new readings appear beside door events.</p></div>
+  </div>
+</section>
+
+<section id="status">
+  <div class="status">
+    <div>
+      <span class="eyebrow">Where it is today</span>
+      <h3 style="margin-top:10px;">Working prototype</h3>
+      <ul>
+        <li>Android gateway app with alarm, push, email and portal upload</li>
+        <li>iPhone test build of the gateway</li>
+        <li>Web portal with trucks, sensors and full event history</li>
+        <li>Automated builds and unit tests on every change</li>
+      </ul>
+    </div>
+    <div>
+      <span class="eyebrow">Next steps</span>
+      <h3 style="margin-top:10px;">Field pilot</h3>
+      <ul>
+        <li>Road tests on steel trailers to confirm Bluetooth range to the cab</li>
+        <li>"Sensor missing" alert when a sensor goes silent</li>
+        <li>Auto-start after the phone reboots</li>
+        <li>Own push server and backend before customer rollout</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span><span class="plate" style="font-size:12px; padding:1px 7px;">360</span>&nbsp; Tracker 360 by Inova Global Ltd</span>
+  <span>Prototype portfolio · November 2026</span>
+</footer>
+</div>
+
+</body>
+</html>
