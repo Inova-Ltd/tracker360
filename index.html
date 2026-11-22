@@ -165,6 +165,14 @@ section { padding-block: 72px; border-top: 1px solid var(--line); }
 /* Status */
 .status { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
 .status ul { margin: 12px 0 0; padding-left: 20px; display: grid; gap: 6px; color: var(--muted); font-size: 16px; }
+.contact { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+.contact p { color: var(--muted); font-size: 17px; max-width: 46ch; margin-top: 14px; }
+.contact dl { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px 24px; border: 1px solid var(--line); border-radius: 10px; padding: 24px; }
+.contact dt { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.contact dd { margin: 0; font-size: 17px; overflow-wrap: anywhere; }
+.cta { display: inline-block; margin-top: 22px; background: var(--plate); color: var(--plate-ink); border: 2px solid var(--plate-ink); border-radius: 8px; padding: 10px 18px; font-weight: 600; text-decoration: none; }
+footer small { display: block; margin-top: 4px; }
+@media (max-width: 900px) { .contact { grid-template-columns: minmax(0, 1fr); } }
 footer { padding-block: 40px 64px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
 
 @media (max-width: 900px) {
@@ -411,9 +419,26 @@ footer { padding-block: 40px 64px; border-top: 1px solid var(--line); color: var
   </div>
 </section>
 
+<section id="contact">
+  <div class="contact">
+    <div>
+      <span class="eyebrow">Get in touch</span>
+      <h2 style="margin-top:10px;">Talk to us about a pilot.</h2>
+      <p>Tracker 360 is built by Inova Global Ltd. If you move goods by road and want to know the moment a trailer door opens, we would like to hear from you.</p>
+      <a class="cta" href="mailto:info@inovaltd.com?subject=Tracker%20360">Email info@inovaltd.com</a>
+    </div>
+    <dl>
+      <dt>Company</dt><dd>Inova Global Ltd</dd>
+      <dt>Email</dt><dd><a href="mailto:info@inovaltd.com">info@inovaltd.com</a></dd>
+      <dt>Website</dt><dd><a href="https://www.inovaltd.com/" target="_blank" rel="noopener">www.inovaltd.com</a></dd>
+      <dt>Company no.</dt><dd>17079214</dd>
+    </dl>
+  </div>
+</section>
+
 <footer>
   <span><span class="plate" style="font-size:12px; padding:1px 7px;">360</span>&nbsp; Tracker 360 by Inova Global Ltd</span>
-  <span>Prototype portfolio · November 2026</span>
+  <span>Inova Global Ltd · Company number 17079214 · <a href="https://www.inovaltd.com/" target="_blank" rel="noopener">inovaltd.com</a> · <a href="mailto:info@inovaltd.com">info@inovaltd.com</a></span>
 </footer>
 </div>
 
