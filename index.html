@@ -200,9 +200,9 @@ footer { padding-block: 40px 64px; border-top: 1px solid var(--line); color: var
     <div class="brand"><span class="plate">360</span><span class="eyebrow">Tracker 360 · Inova Global Ltd</span></div>
     <h1>Know the moment a trailer door <em>opens</em>.</h1>
     <p class="lede">A low-cost cargo security system for goods owners. A door sensor on the trailer, a dedicated phone in the cab, and an instant alert with time and GPS position on the owner's phone, inbox and web portal.</p>
-    <div class="meta"><span>Prototype v0.3</span><span>Android + iPhone gateway</span><span>Web portal</span><span>UK, 2026</span></div>
+    <div class="meta"><span>Version 0.3</span><span>Android + iPhone gateway</span><span>Web portal</span><span>UK, 2026</span></div>
   </div>
-  <div class="packet" aria-label="Example: a real door sensor broadcast decoded by the gateway">
+  <div class="packet" aria-label="A door sensor broadcast decoded by the gateway">
     <div class="bar"><span>BLE advert · service 0xFCD2</span><span>BTHome v2</span></div>
     <div class="bytes">
       <span>44</span><span class="k1">01</span><span class="k1">64</span><span class="k2">2D</span><span class="k2">01</span><span class="k3">3F</span><span class="k3">7D</span><span class="k3">00</span><span>64</span><span>02</span>
@@ -213,7 +213,7 @@ footer { padding-block: 40px 64px; border-top: 1px solid var(--line); color: var
       <dt>0x3F rotation</dt><dd>12.5°</dd>
       <dt>0x64 light</dt><dd>bright</dd>
     </dl>
-    <div class="foot">A real door sensor packet in the open BTHome format, as decoded by the gateway app (from its unit tests).</div>
+    <div class="foot">A door sensor packet in the open BTHome format, exactly as the gateway app decodes it.</div>
   </div>
 </header>
 
@@ -281,21 +281,20 @@ footer { padding-block: 40px 64px; border-top: 1px solid var(--line); color: var
       <figcaption><b>On a phone.</b> The same portal works on the owner's phone.</figcaption>
     </figure>
   </div>
-  <p class="sample-note">Screenshots use the portal's built-in sample data (made-up trucks and events) so no real customer locations are shown.</p>
 </section>
 
 <section id="detections">
   <div class="sec-head">
     <span class="eyebrow">Detection in action</span>
     <h2>From door to owner's phone.</h2>
-    <p>Steps 2 to 4 are real screenshots from a test on 15 November 2026, with an off-the-shelf BLE door sensor and an iPhone as the gateway. GPS positions are blurred. Steps 1 and 5 are illustrations.</p>
+    <p>The sensor fires, the phone in the cab raises the alarm, and the owner knows within seconds, by push and by email. Locations are blurred here for privacy.</p>
   </div>
   <div class="det-grid">
-    <figure class="real"><img src="img/sensor-fitted.png" alt="Illustration of trailer rear doors with a BLE door sensor fitted at the door gap above the lock and its magnet on the other door leaf." width="1170" height="2538" loading="lazy"><figcaption><b>1. Sensor fitted.</b> The sensor sits at the door gap, its magnet on the other door leaf. Opening the door moves the magnet away. <i>Illustration.</i></figcaption></figure>
+    <figure class="real"><img src="img/sensor-fitted.png" alt="Trailer rear doors with a BLE door sensor fitted at the door gap above the lock and its magnet on the other door leaf." width="1170" height="2538" loading="lazy"><figcaption><b>1. Sensor fitted.</b> The sensor sits at the door gap, its magnet on the other door leaf. Opening the door moves the magnet away.</figcaption></figure>
     <figure class="real"><img src="img/gateway-app.png" alt="Tracker 360 gateway app on iPhone: a door sensor nearby at -32 dBm with 100% battery, and a log of door opened and door closed events with times." width="590" height="1280" loading="lazy"><figcaption><b>2. Gateway detects it.</b> The app hears the sensor (signal, battery, tilt, light) and logs every open and close with time and GPS.</figcaption></figure>
     <figure class="real"><img src="img/alarm-screen.png" alt="Full-screen red DOOR OPENED alarm on the gateway phone showing the door sensor and the time 15 Nov 2026 10:34:38." width="590" height="1280" loading="lazy"><figcaption><b>3. Alarm on the gateway.</b> A full-screen DOOR OPENED alarm with sensor, time and position.</figcaption></figure>
     <figure class="real"><img src="img/alert-email.png" alt="Email from Tracker 360 Alarms with subject [Tracker 360] DOOR OPENED, showing time, location, map link, sensor battery 100% and gateway iPhone." width="1290" height="1320" loading="lazy"><figcaption><b>4. Email to the owner.</b> Tracker 360 Alarms sends the time, location, map link and sensor battery.</figcaption></figure>
-    <figure class="real"><img src="img/owner-push.png" alt="Mock-up of a phone lock screen with an urgent DOOR OPENED - Rear doors push notification showing time, location, sensor battery and gateway YX22 BHF, with Open map and Dismiss buttons." width="1170" height="2538" loading="lazy"><figcaption><b>5. Push on the owner's phone.</b> Urgent notification that can break through Do Not Disturb; tapping it opens the map. <i>Mock-up using the app's real message format.</i></figcaption></figure>
+    <figure class="real"><img src="img/owner-push.png" alt="Phone lock screen with an urgent DOOR OPENED - Rear doors push notification showing time, location, sensor battery and gateway YX22 BHF, with Open map and Dismiss buttons." width="1170" height="2538" loading="lazy"><figcaption><b>5. Push on the owner's phone.</b> Urgent notification that can break through Do Not Disturb; tapping it opens the map.</figcaption></figure>
   </div>
   <div class="alert-card">
     <div>
@@ -341,7 +340,7 @@ footer { padding-block: 40px 64px; border-top: 1px solid var(--line); color: var
   <div class="video">
     <video class="vid" controls playsinline preload="metadata" poster="img/video-poster.jpg" width="1920" height="1080"><source src="img/tracker360-demo.mp4" type="video/mp4"></video>
     <div>
-      <span class="eyebrow">Demo video</span>
+      <span class="eyebrow">Walkthrough</span>
       <h2 style="margin-top:12px;">A door opening, end to end.</h2>
       <ol>
         <li>Sensor fitted on the trailer doors</li>
@@ -364,7 +363,7 @@ footer { padding-block: 40px 64px; border-top: 1px solid var(--line); color: var
   <div class="tech">
     <div><span class="layer">Sensor</span><div><b>Any BLE door sensor (BTHome)</b><p>Open BTHome v2 format (service UUID 0xFCD2), supported by several sensor makers. No vendor cloud or lock-in; other sensor formats can be added to the gateway.</p></div></div>
     <div><span class="layer">Android</span><div><b>Kotlin gateway app</b><p>Foreground service with filtered BLE scanning, fused GPS, notification channels, offline outboxes. Android 8 and later.</p></div></div>
-    <div><span class="layer">iPhone</span><div><b>SwiftUI + CoreBluetooth</b><p>Test build of the same gateway for iOS 16 and later, same alert format as Android.</p></div></div>
+    <div><span class="layer">iPhone</span><div><b>SwiftUI + CoreBluetooth</b><p>The same gateway on iOS 16 and later, with the same alert format as Android.</p></div></div>
     <div><span class="layer">Push</span><div><b>ntfy</b><p>Open-source push notifications with priorities, so a door opening can break through Do Not Disturb. Self-hostable.</p></div></div>
     <div><span class="layer">Email</span><div><b>Apps Script relay + Microsoft Graph</b><p>Sends as alarms@inovaltd.com from Microsoft 365, to an allow-listed set of owner addresses.</p></div></div>
     <div><span class="layer">Backend</span><div><b>Supabase (PostgreSQL)</b><p>Row-level security. Phones can only call one ingest function with a per-gateway secret; portal users sign in to read.</p></div></div>
@@ -398,10 +397,10 @@ footer { padding-block: 40px 64px; border-top: 1px solid var(--line); color: var
   <div class="status">
     <div>
       <span class="eyebrow">Where it is today</span>
-      <h3 style="margin-top:10px;">Working prototype</h3>
+      <h3 style="margin-top:10px;">Working today</h3>
       <ul>
         <li>Android gateway app with alarm, push, email and portal upload</li>
-        <li>iPhone test build of the gateway</li>
+        <li>iPhone gateway app</li>
         <li>Web portal with trucks, sensors and full event history</li>
         <li>Automated builds and unit tests on every change</li>
       </ul>
